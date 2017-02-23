@@ -50,6 +50,7 @@ public class Customer {
         return groceries.get(date);
     }
 
+    /*
     //Story 5(KevinB: not testDriven, imported with packages from google;
     public <ShopItem> List<ShopItem> getMostFrequentElements(List<ShopItem> list) {
         Multiset<ShopItem> multiset = HashMultiset.create(list);
@@ -69,4 +70,5 @@ public class Customer {
 
         return mostFrequents;
     }
+    */
 }
