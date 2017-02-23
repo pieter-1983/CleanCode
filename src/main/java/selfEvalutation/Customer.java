@@ -1,5 +1,8 @@
 package selfEvalutation;
 
+import jersey.repackaged.com.google.common.collect.HashMultiset;
+import jersey.repackaged.com.google.common.collect.Multiset;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -44,5 +47,25 @@ public class Customer {
 
     public List<ShopItem> getGroceriesByDay(LocalDate date) {
         return groceries.get(date);
+    }
+
+    //Story 5(KevinB: not testDriven, imported with packages from google;
+    public <ShopItem> List<ShopItem> getMostFrequentElements(List<ShopItem> list) {
+        Multiset<ShopItem> multiset = HashMultiset.create(list);
+
+        List<ShopItem> mostFrequents = new ArrayList<>();
+        int maxCount = 0;
+
+        for (Multiset.Entry<ShopItem> entry : multiset.entrySet()) {
+            if (entry.getCount() > maxCount) {
+                maxCount = entry.getCount();
+                mostFrequents.clear();
+                mostFrequents.add(entry.getElement());
+            } else if (entry.getCount() == maxCount) {
+                mostFrequents.add(entry.getElement());
+            }
+        }
+
+        return mostFrequents;
     }
 }
