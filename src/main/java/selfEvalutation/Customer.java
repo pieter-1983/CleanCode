@@ -39,5 +39,10 @@ public class Customer {
 
     public void buySomeGroceries(List<ShopItem> thingsCusBought){
         LocalDate date = LocalDate.now();
+        groceries.put(date, thingsCusBought);
+    }
+
+    public List<ShopItem> getGroceriesByDay(LocalDate date) {
+        return groceries.get(date);
     }
 }
