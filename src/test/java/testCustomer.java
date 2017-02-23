@@ -1,32 +1,44 @@
-import com.fasterxml.jackson.databind.util.ArrayBuilders;
 import org.assertj.core.api.Assertions;
 import org.junit.Before;
 import org.junit.Test;
 import selfEvalutation.Customer;
 import selfEvalutation.CustomerRepository;
-
-import java.util.ArrayList;
+import selfEvalutation.LoyaltyCard;
 
 /**
  * Created by pieterst on 23/02/2017.
  */
 public class testCustomer {
     private Customer testCustomer;
-    private CustomerRepository customerReposiory;
+    private CustomerRepository customercustomerRepository;
+    private Customer testCustomer1;
+    private Customer testCustomer2;
+    private Customer testCustomer3;
 
     @Before
     public void setUp(){
         testCustomer= new Customer("Pieter", "Sterckx");
-        customerReposiory= new CustomerRepository();
+
+        customercustomerRepository = new CustomerRepository();
+
+        testCustomer1 = new Customer("Elise", "Lodewyckx", new LoyaltyCard("123", 6) );
+        testCustomer2 = new Customer("Stijn", "Liekens", new LoyaltyCard("456", 2));
+        testCustomer3 = new Customer("Paulien", "Lemay", new LoyaltyCard("789", 3));
     }
 
     @Test
     public void CheckIfCustomerGetsAddedToList(){
-        Integer inititalCount= customerReposiory.getCustomerList().size();
-        customerReposiory.addToList(testCustomer);
-        Assertions.assertThat(customerReposiory.getCustomerList().size()).isEqualTo(inititalCount+1);
-
+        Integer inititalCount= customercustomerRepository.getCustomerList().size();
+        customercustomerRepository.addCustomerToList(testCustomer);
+        Assertions.assertThat(customercustomerRepository.getCustomerList().size()).isEqualTo(inititalCount+1);
     }
+
     @Test
-    public void TestIfCustomer
+    public void findCustomerByUsingTheBarCodeTest(){
+        customercustomerRepository.addCustomerToList(testCustomer1);
+        customercustomerRepository.addCustomerToList(testCustomer2);
+        customercustomerRepository.addCustomerToList(testCustomer3);
+
+        Assertions.assertThat(customercustomerRepository.findCustomerByBarcode("789")).isEqualTo(testCustomer3);
+    }
 }

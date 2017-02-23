@@ -15,8 +15,20 @@ public class CustomerRepository {
         return customerList;
     }
 
-    public void addToList(Customer customer) {
+    public void addCustomerToList(Customer customer) {
         customerList.add(customer);
 
+    }
+
+    public Customer findCustomerByBarcode(String barcode) {
+        Customer customerToReturn = null;
+
+        for (Customer cus: customerList) {
+            String customerBarcode = cus.getLoyaltyCard().getBarCode();
+            if (customerBarcode.equals(barcode)) {
+                customerToReturn = cus;
+            }
+        }
+        return customerToReturn;
     }
 }
