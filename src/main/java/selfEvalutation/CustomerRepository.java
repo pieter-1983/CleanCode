@@ -20,15 +20,17 @@ public class CustomerRepository {
 
     }
 
-    public Customer findCustomerByBarcode(String barcode) {
-        Customer customerToReturn = null;
+    public Customer findCustomerByBarcode(String barcode) throws Exception {
 
         for (Customer cus: customerList) {
-            String customerBarcode = cus.getLoyaltyCard().getBarCode();
-            if (customerBarcode.equals(barcode)) {
-                customerToReturn = cus;
+            if (getBarCode(cus).equals(barcode)) {
+                return cus;
             }
         }
-        return customerToReturn;
+        throw new Exception("No customer found with this barcode");
+    }
+
+    private String getBarCode(Customer cus) {
+        return cus.getLoyaltyCard().getBarCode();
     }
 }

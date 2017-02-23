@@ -12,6 +12,7 @@ import java.util.List;
  * Created by pieterst on 23/02/2017.
  */
 public class Customer {
+
     private String firstName;
     private String lastName;
     private LoyaltyCard loyaltyCard;
